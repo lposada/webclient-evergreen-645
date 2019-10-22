@@ -17,14 +17,16 @@ def crearmedicion():
 
 @app.route("/listarMediciones", methods=['GET'])
 def listarMediciones():
-    medicion_list = requests.get('http://localhost:4000/Mediciones').json()
+    medicion_list = requests.get('https://api-evergreen-luis.azurewebsites.net/Mediciones').json()
     return render_template('listaMedicion.html', mediciones=medicion_list)
 
 @app.route("/guardarMedicion", methods=['POST'])
 def guardarMedicion():
     medicion = dict(request.values)
     medicion['valor'] = int(medicion['valor'])
-    requests.post('http://localhost:4000/Mediciones',json=medicion)
+    requests.post('https://api-evergreen-luis.azurewebsites.net/Mediciones',json=medicion)
     return(listarMediciones())
 
-app.run(port=8000, debug=True)
+@app.route("/")
+def hello():
+    return "Hello World!"
