@@ -26,9 +26,3 @@ def guardarMedicion():
     medicion['valor'] = int(medicion['valor'])
     requests.post('https://api-evergreen-luis.azurewebsites.net/Mediciones',json=medicion)
     return(listarMediciones())
-
-@app.route("/")
-def hello():
-    return "Hello World!"
-
-gunicorn --bind=0.0.0.0 --timeout 600 app:app
